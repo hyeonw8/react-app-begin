@@ -1,25 +1,60 @@
-import logo from './logo.svg';
+import { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+// function App() { function type
+//   return (
+//     <div className="App">
+//       Hello, React!!
+//     </div>
+//   );
+// }
+
+class Subject extends Component {
+  render() {
+    return ( // 컴포넌트 만들때 반드시 하나의 최상위 태그로 시작해야
+      <header>
+        <h1>{this.props.title}</h1>
+        {this.props.sub}
       </header>
-    </div>
-  );
+    );
+  }
+}
+
+class TOC extends Component {
+  render() {
+    return (
+      <nav>
+        <ul>
+          <li><a href="1.html" /></li>
+          <li><a href="2.html" /></li>
+          <li><a href="3.html" /></li>
+        </ul>
+      </nav>
+    );
+  }
+}
+
+class Content extends Component {
+  render() {
+    return (
+      <article>
+        <h2>{this.props.title}</h2>
+        {this.props.desc}
+      </article>
+    );
+  }
+}
+
+class App extends Component { // class type
+  render() { // render 메소드
+    return (
+      <div className='App'>
+        <Subject title="WEB" sub="world wide web!"></Subject>
+        <TOC></TOC>
+        <Content title="HTML" desc="HTML is HyperText Markup Language."></Content>
+      </div>
+    )
+  }
 }
 
 export default App;
