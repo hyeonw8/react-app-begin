@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 
 class TOC extends Component {
+  shouldComponentUpdate(newProps, newState){ // 성능에 문제가 있을 때 사용하면 좋음~ 꼭 해야하는 건 아님.
+    console.log('===>TOC render shouldComponentUpdate'
+      ,newProps.data
+      ,this.props.data
+    );
+    if(this.props.data === newProps.data){
+      return false;
+    }
+    return true;
+  }
   render() {
     let lists = [];
     let data = this.props.data;
