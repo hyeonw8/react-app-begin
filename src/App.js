@@ -56,26 +56,32 @@ class App extends Component { // class type
       _article = <CreateContent onSubmit={function(_title, _desc){
         //  add content to this.state.contents
         this.max_content_id = this.max_content_id + 1;
-        const _contents = this.state.contents.concat(
-          {id:this.max_content_id, title:_title, desc:_desc}
-        )
+        const _contents = Array.from(this.state.contents);
+        _contents.push({id:this.max_content_id, title:_title, desc:_desc});
         this.setState({
-          contents: _contents
+          contents: _contents,
+          mode: 'read',
+          selected_content_id:this.max_content_id
         })
-        console.log(_title,_desc);
       }.bind(this)}></CreateContent>
     } else if(this.state.mode === 'update'){
       _content = this.getReadContent();
-      _article = <UpdateContent data={_content} onSubmit={function(_title, _desc){
-        this.max_content_id = this.max_content_id + 1;
-        const _contents = this.state.contents.concat(
-          {id:this.max_content_id, title:_title, desc:_desc}
-        )
-        this.setState({
-          contents: _contents
-        })
-        console.log(_title,_desc);
-      }.bind(this)}></UpdateContent>
+      _article = <UpdateContent data={_content} onSubmit={
+        function(_title, _desc){
+          const _contents = Array.from(this.state.contents); // 원본을 바꾸지 않는 방ㅓ
+          let i = 0;
+          while(i < _contents.length){
+            if(_contents[i].id === id){
+              _contents[i] = {id:id, title:_title, desc:_desc};
+              break;
+            }
+          }
+          this.setState({
+            contents: _contents,
+            mode: 'read'
+          })
+        }.bind(this)
+      }></UpdateContent>
     }
     return _article;
   }
