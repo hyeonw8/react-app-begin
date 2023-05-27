@@ -13,7 +13,6 @@ class UpdateContent extends Component {
   inputFormHandler(e){
     this.setState({[e.target.name]:e.target.value});
   }
-}
   render() {
     console.log(this.props.data);
     console.log('UpdateContent render');
@@ -53,7 +52,6 @@ class UpdateContent extends Component {
           <p>
             <input type="submit"></input>
           </p>
-
         </form>
       </article>
     );
