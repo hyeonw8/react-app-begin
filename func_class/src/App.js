@@ -2,11 +2,20 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [funcShow, setFuncShow] = useState(true);
+  const [classShow, setClassShow] = useState(true);
+
   return (
-    <div className="App">
+    <div className="container">
       <h1>Hello World</h1>
-      <FuncComp initNumber={2} />
-      <ClassComp initNumber={2} />
+      <input type="button" value="remove func" onClick={function(){
+        setFuncShow(false);
+      }}></input>
+       <input type="button" value="remove class" onClick={function(){
+        setClassShow(false);
+      }}></input>
+      {funcShow ? <FuncComp initNumber={2} /> : null }
+      {classShow ? <ClassComp initNumber={2} /> : null}
     </div>
   );
 }
@@ -81,6 +90,9 @@ class ClassComp extends React.Component {
   }
   componentDidUpdate(){
     console.log('%cclass => componentDidUpdate', classStyle);
+  }
+  componentWillUnmount(){
+    console.log('%cclass => componentWillUnmount', classStyle);
   }
   render() {
     console.log('%cclass => render', classStyle);
