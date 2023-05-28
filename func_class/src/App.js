@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <h1>Hello World</h1>
-      <ClassComp initNumber={2} />
       <FuncComp initNumber={2} />
+      <ClassComp initNumber={2} />
     </div>
   );
 }
@@ -14,13 +14,38 @@ let funcStyle = 'color:yellow';
 let funId = 0;
 function FuncComp(props) {
   let [ _number, setNumber ] = useState(props.initNumber);
+  let [ _date, setDate ] = useState(new Date().toString());
+
+
+  useEffect(function(){ // 처음 한 번만 실행되고 다시 실행되지 않게 
+    console.log('%cfunc => useEffect (componentDidMount) ' + (++funId), funcStyle);
+    document.title = _number
+    return function(){ // clean up
+      console.log('%cfunc => useEffect return (componentDidMount) ' + (++funId), funcStyle);
+    }
+  }, []); // 두번째 인자로 빈배열을 추가
+
+  // useEffect => side effect가 생략된 말 
+  useEffect(function(){
+    console.log('%cfunc => useEffect _number (componentDidMount & componentDidUpdate) ' + (++funId), funcStyle);
+    document.title = _number;
+    return function(){ // clean up
+      console.log('%cfunc => useEffect _number return (componentDidMount & componentDidUpdate) ' + (++funId), funcStyle);
+    }
+  }, [_number]); // 두 번째 인자로 number줘서 number가 바뀔때만 업데이트
+
+  useEffect(function(){
+    console.log('%cfunc => useEffect _date (coponentDidMount & componentDidUpdate) ' + (++funId), funcStyle);
+    document.title =  _date;
+    return function(){ // clean up
+      console.log('%cfunc => useEffect _date return (coponentDidMount & componentDidUpdate) ' + (++funId), funcStyle);
+    }
+  }, [_date]);
   
   //   const dateState = useState((new Date()).toString());
   //   const _date = dateState[0];
   //   const setDate = dateState[1];  
-  let [ _date, setDate ] = useState(new Date().toString());
-  console.log('%cfunc => render' + (++funId), funcStyle);
-
+  console.log('%cfunc => render ' + (++funId), funcStyle);
   return (
     <div className="container">
       <h2>function style component</h2>
