@@ -13,7 +13,7 @@
     <div id="root"></div>
     <script type="text/babel">
       class GuGuDan extends React.Component {
-        constructor(porps) {
+        /* constructor(porps) { //constructor 빼도 됨. 실무에선 거의 빼고 이런식으로 씀
           super(porps);
           this.state={
             first: Math.ceil(Math.random() * 9),
@@ -21,11 +21,18 @@
             value: '',
             result: '',
             };
-          }
+          } */
+        state = {
+          first: Math.ceil(Math.random() * 9),
+          second: Math.ceil(Math.random() * 9),
+          value: '',
+          result: '',
+        };
+      
         
         onSubmit = (e) => {
-          e.preventDefalut();
-          if(parseInt(value) === this.state.first * this.state.second){
+          e.preventDefault();
+          if(parseInt(this.state.value) === this.state.first * this.state.second){
             this.setState({
               result: '정답',
               first: Math.ceil(Math.random() * 9),
@@ -40,29 +47,29 @@
           }
         };
 
-        onChange = (e) => {
-          this.setState({value:e.target.value});
+        onChange = (e) => { // onChange = function (e) => {} 안됨. 따로 빼면(직접 만든 함수) 무조건 화살표 함수로!
+          this.setState({value:e.target.value}); //this가 달라지기 때문
         }
 
         render() {
          return (
-          <div>
+          <React.Fragment>
             <div>{this.state.first}곱하기{this.state.second}는?</div>
             <form onSubmit={this.onSubmit}>
               <input 
                 type="number" 
                 value={this.state.value} 
                 onChange={this.onChange} /> 
-              <button>입력!</button>
+              <button type="submit">입력!</button>
             </form>
             <div>{this.state.result}</div>
-          </div>
+          </React.Fragment >
          );
         }
       }
     </script>
     <script type="text/babel">
-      ReactDOM.render(<GuGuDan/>, document.querySelector('#root'));
+      ReactDOM.render(<GuGuDan />, document.querySelector('#root'));
     </script>
   </body>
 </html>
