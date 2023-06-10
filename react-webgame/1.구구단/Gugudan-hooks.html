@@ -10,7 +10,9 @@
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
+  <div id="root"></div>
   <script type="text/babel">
+    'use strict'
     const GuGuDan = () => {
       const [first, setFirst] = React.useState(Math.ceil(Math.random()*9));
       const [second, setSecond] = React.useState(Math.ceil(Math.random()*9));
@@ -18,11 +20,11 @@
       const [result, setResult] = React.useState('');
       const inputRef = React.useRef(null);
     
-      onChangeInput = () => {
+      const onChangeInput = (e) => {
         setValue(e.target.value);
       };
 
-      onSubmitForm = () => {
+      const onSubmitForm = (e) => {
         e.preventDefault();
         if (parseInt(value) === first * second) {
           setResult('정답: ', value);
