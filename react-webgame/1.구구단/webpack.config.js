@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'); 
 
 module.exports = {
   //name: 'gugudan-setting',
@@ -25,16 +25,25 @@ module.exports = {
           }
         }]
         , '@babel/preset-react'], //plugin들의 모음이 preset
-        plugins: ['@babel/plugin-proposal-class-properties'],
+        plugins: [
+          '@babel/plugin-proposal-class-properties',
+          'react-refresh/babel',
+        ],
       }
     }]
   },
   plugins: [ // 추가적으로 하고 싶은 설정
-    new webpack.LoaderOptionsPlugin({debug: true }),
+    new RefreshWebpackPlugin(),
   ], 
  
   output: {
     filename: 'app.js',
     path: path.join(__dirname, 'dist'),
   },
+  devServer: {
+    devMiddleware: {publicPath: '/dist/'},
+    static: {directory: path.resolve(__dirname)},
+    hot: true,
+    liveReload:false,
+  }
 };
