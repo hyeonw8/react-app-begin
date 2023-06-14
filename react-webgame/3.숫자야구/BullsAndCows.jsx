@@ -1,4 +1,5 @@
 const React = require('react');
+const Try = require('./Try');
 const { useState, Component } = React;
 
 
@@ -21,6 +22,16 @@ const BullsAndCows = () => {
 
   }
 
+  const fruits = [
+    { fruit: '사과', taste: '맛있다'},
+    { fruit: '감', taste: '시다'},
+    { fruit: '귤', taste: '달다'},
+    { fruit: '밤', taste: '떫다'},
+    { fruit: '배', taste: '맛있다'},
+    { fruit: '무', taste: '맛없다'},
+    { fruit: '사과', taste: '맛있다'},
+  ];
+
     return (
       <>
         <h1>{result}</h1>
@@ -32,9 +43,9 @@ const BullsAndCows = () => {
         </form>
         <div>시도: {tries.length}</div>
         <ul>
-          {['like', 'like', 'like', 'like', 'like'].map((v) => {
+          {fruits.map((v, i) => { // 컴포넌트를 따로 분리하게 되면서 v,i가 누군지 모르니깐 
             return (
-              <li>{v}</li>
+              <Try key={v.fruit + v.taste} value={v} index={i} /> //props로 달아줘야힘
             );
           })} 
         </ul>
