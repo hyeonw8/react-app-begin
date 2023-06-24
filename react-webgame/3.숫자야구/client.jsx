@@ -1,7 +1,7 @@
-const React = require ('react');
-const ReactDom = require ('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const BullsAndCows = require('/BullsAndCows');
+import BullsAndCows from '/BullsAndCows';
 
-ReactDom.render(<BullsAndCows />, document.querySelector('#root'));
+ReactDOM.render(<BullsAndCows />, document.querySelector('#root'));
 // <  />이런식으로 쓸거면 확장자명 jsx로~

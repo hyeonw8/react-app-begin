@@ -1,18 +1,12 @@
-const React = require('react');
-const { Component, memo } = React;
+import React, { memo } from 'react';
 
-class Try extends Component {
-  render() {
+const Try = memo(({tryInfo}) => {
   return (
     <li>
-      <b>{this.props.value.fruit}</b> - {this.props.index}
-      <div>컨텐츠1</div>
-      <div>컨텐츠2</div>
-      <div>컨텐츠3</div>
-      <div>컨텐츠4</div>
+      <div>{tryInfo.try}</div>
+      <div>{tryInfo.result}</div>
     </li>
   );
-  };
-}
+});
 
-module.exports = Try;
+export default Try;
