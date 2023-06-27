@@ -15,7 +15,7 @@ module.exports = {
 
   module: {
     rules: [{
-      test: /\.jsx?/,
+      test: /\.jsx?$/,
       loader: 'babel-loader',
       options: {
         presets: [
@@ -35,7 +35,7 @@ module.exports = {
   },
 
   plugins: [
-    new RefreshWebpackPlugin()
+    new RefreshWebpackPlugin(),
   ],
   output: {
     path: path.join(__dirname, 'dist'),
